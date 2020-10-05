@@ -1,0 +1,15 @@
+public boolean insert(String time, String latitude, String longitude, String elevation) {
+		
+		
+		int TIME = Integer.parseInt(time);
+		double LATITUDE = Double.parseDouble(latitude);
+		double LONGITUDE = Double.parseDouble(longitude);
+		double ELEVATION = Double.parseDouble(elevation);
+		
+		GPSPoint gpspoint = new GPSPoint(TIME,LATITUDE,LONGITUDE,ELEVATION);
+
+		boolean inserted = insertGPS(gpspoint);
+		
+		return inserted;
+		
+	}
