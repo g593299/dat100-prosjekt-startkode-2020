@@ -12,7 +12,7 @@ public class GPSData {
 
 		// TODO - START
 		
-		throw new UnsupportedOperationException(TODO.construtor("GPSData"));
+		
 
 		// TODO - SLUTT
 	}
