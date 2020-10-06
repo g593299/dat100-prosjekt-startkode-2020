@@ -1,0 +1,134 @@
+	public static double findMax(double[] da) {
+
+		double max; 
+		
+		max = da[0];
+		
+		for (double d : da) {
+			if (d > max) {
+				max = d;
+			}
+		}
+		
+		return max;
+	}
+
+	public static double findMin(double[] da) {
+
+		double min;
+
+		// TODO - START
+
+		min = da[0];
+		
+		for (double d: da) {
+			if (d<min) {
+				min=d;
+			}
+		}
+		return min;
+
+		// TODO - SLUT
+
+	}
+
+	public static double[] getLatitudes(GPSPoint[] gpspoints) {
+
+		// TODO - START
+		
+		double[] lats = new double[gpspoints.length];
+		
+		for (int i=0; i<lats.length; i++) {
+			lats[i] = gpspoints[i].getLatitude();
+		}
+		return lats;
+		
+		// TODO - SLUTT
+	}
+
+	public static double[] getLongitudes(GPSPoint[] gpspoints) {
+
+		// TODO - START
+
+		double[] lons = new double[gpspoints.length];
+		for(int i=0; i<lons.length;i++) {		
+		lons[i] = gpspoints[i].getLongitude();
+		}
+		return lons;	
+		}
+		
+		// TODO - SLUTT
+
+	
+	private static int R = 6371000;
+	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
+		
+		double latitude1, longitude1, latitude2, longitude2;
+
+		// TODO - START
+	
+		double lat1 = toRadians(gpspoint1.getLatitude());
+		double lon1 = toRadians(gpspoint1.getLongitude());
+		double lat2 = toRadians(gpspoint2.getLatitude());
+		double lon2 = toRadians(gpspoint2.getLongitude());
+		double lat3 = lat2 - lat1;
+		double lon3 = lon2 - lon1;		
+		double a = pow(sin(lat3/2), 2) + cos(lat1) * cos(lat2) * pow(sin(lon3/2), 2);
+		double c = 2 * atan2(sqrt(a), sqrt(1-a));
+		int R = 6371000;
+		double d = R*c;
+		return d;
+
+		// TODO - SLUTT
+
+	}
+
+	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
+
+		int secs;
+		double speed;
+
+		// TODO - START
+
+		secs = gpspoint2.getTime() - gpspoint1.getTime();
+		double distance = distance(gpspoint1, gpspoint2);
+
+		return 3.6 * distance / secs;
+
+		// TODO - SLUTT
+
+	}
+
+	public static String formatTime(int secs) {
+
+		String timestr;
+		String TIMESEP = ":";
+
+		// TODO - START
+
+		int hrs = secs / 3600;
+		int min = secs % 3600 / 60;
+		int sec = secs % 60;
+		
+		// %02d betyr "formatter tallet med 2 siffer, og sett inn 0 i begynnelsen om det trengs"
+		return String.format("  %02d:%02d:%02d", hrs, min, sec);
+		
+		// TODO - SLUTT
+
+	}
+	private static int TEXTWIDTH = 10;
+
+	public static String formatDouble(double d) {
+
+		String str;
+
+		// TODO - START
+		
+		
+		
+		return result;
+
+		// TODO - SLUTT
+		
+	}
+}
