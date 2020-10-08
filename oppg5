@@ -1,0 +1,72 @@
+
+DETTE ER SHOWROUTE
+
+
+public void showStatistics() {
+
+		int TEXTDISTANCE = 20;
+
+		setColor(0,0,0);
+		setFont("Courier",12);
+		
+		String text[] = {	"Total time", 
+							"Total distance", 
+							"Total elevation", 
+							"Max speed", 
+							"Average speed", 
+							"Energy"};
+		
+		String statistics[] = {	" " + GPSUtils.formatTime(gpscomputer.totalTime()),
+								"   " + GPSUtils.formatDouble(gpscomputer.totalDistance()/1000) + " km", 
+								"  " + GPSUtils.formatDouble(gpscomputer.totalElevation()) + " m",
+								"   " + GPSUtils.formatDouble(gpscomputer.maxSpeed()) + " km/t",
+								"   " + GPSUtils.formatDouble(gpscomputer.averageSpeed()) + " km/t", 
+								" " + GPSUtils.formatDouble(gpscomputer.totalKcal(46.938)) + " kcal"};
+		
+		for(int i = 0; i < statistics.length; i++) {
+			drawString(text[i], TEXTDISTANCE, TEXTDISTANCE + i*TEXTDISTANCE);
+			drawString(" :" + statistics[i], TEXTDISTANCE*5, TEXTDISTANCE + i*TEXTDISTANCE);
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+SHOWSPEED
+
+public static void main(String[] args) {
+		launch(args);
+	}
+
+	public void run() {
+
+		int N = gpspoints.length-1; // number of data points
+		
+		makeWindow("Speed profile", 2*MARGIN + 2 * N, 2 * MARGIN + BARHEIGHT);
+		
+		showSpeedProfile(MARGIN + BARHEIGHT,N);
+	}
+	
+	public void showSpeedProfile(int ybase, int N) {
+
+		// get segments speeds from the GPS computer object		
+		double[] speeds = gpscomputer.speeds();
+
+		int x = MARGIN;
+		int y = (int) (ybase-gpscomputer.averageSpeed());
+
+		for(int i = 0; i < speeds.length; i++) {
+			setColor(0, 0, 255);
+			drawLine(x + i * 2, ybase, x + i * 2, (int) (ybase-speeds[i]));
+		}
+		setColor(0, 255, 0);
+		drawLine(x, y, x + N * 2, y);
+	}
+}
